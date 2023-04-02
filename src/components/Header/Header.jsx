@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Input } from "../Input/Input";
 
 export const Header = () => {
   return (
@@ -12,8 +13,8 @@ export const Header = () => {
                   {" "}
                   <div className="pokeball"></div>
                 </li>
-                <li>Home</li>
-                <li>Search</li>
+                <li><Input/></li>
+                
                 <li>About</li>
               </LiStyle>
             </ul>
@@ -25,10 +26,11 @@ export const Header = () => {
 };
 
 const HeaderStyle = styled.header`
+background-color: #BAD7E9;
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 15vh;
+  height: 10vh;
   justify-content: center;
   align-items: center;
   border-bottom: 2px solid #ffc300;
@@ -45,5 +47,9 @@ const LiStyle = styled.ul`
   flex-direction: row;
   gap: 18vh;
   list-style-type: none;
-  font-size: 4vh;
+  font-size: 3vh;
+
+  li{
+    cursor: pointer;
+  }
 `;

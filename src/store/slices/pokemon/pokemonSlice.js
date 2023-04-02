@@ -34,11 +34,11 @@ export const pokemonSlice = createSlice({
     pagesController: (state, action) => {
       if (action.payload === "+") {
         state.begin = state.begin + 12;
-        state.end = state.begin + 12;
+        state.end = state.end + 12;
       } else {
-        if (state.begin - 12 < 0) return;
+        if (state.begin - 12 < 0 || state.end - 12 < 0) return;
         state.begin = state.begin - 12;
-        state.end = state.begin - 12;
+        state.end = state.end - 12;
       }
     },
   },

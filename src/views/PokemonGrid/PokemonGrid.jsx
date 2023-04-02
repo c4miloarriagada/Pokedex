@@ -1,20 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
-import { createRef, useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   getPokemons,
   getPokemonsInfo,
 } from "../../store/slices/pokemon/thunks";
 
 import { Card } from "../../components/Card/Card";
+import { Button } from "../../components/Button/Button";
+import { pagesController } from "../../store/slices/pokemon/pokemonSlice";
+import { CursorWait } from "../../components/CursorWait/CursorWait";
+import { Carrousel } from "../../components/Carrousel/Carrousel";
 import styled from "styled-components";
+import { carrouselPhotoFilter } from "../../helpers/carrouselPhotosFilter";
 
 export const PokemonGrid = () => {
-  const { namePokemons } = useSelector((state) => state.pokemons);
-  const { activePokemons } = useSelector((state) => state.pokemons);
-  const { end } = useSelector((state) => state.pokemons);
-  const { begin } = useSelector((state) => state.pokemons);
-  const imgRef = useRef([]);
+  const { activePokemons, end, begin, isLoading, namePokemons } = useSelector(
+    (state) => state.pokemons
+  );
 
+  const imgRef = useRef([]);
+  const carrouselRef = useRef(null);
+  const [position, setPosition] = useState({ x: 0, y: 0, opacity: 0 });
+  const [onMouse, setOnMouse] = useState(false);
+  const [sprites, setSprites] = useState([])
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,42 +32,57 @@ export const PokemonGrid = () => {
   useEffect(() => {
     if (!namePokemons) return;
     dispatch(getPokemonsInfo(namePokemons));
-  }, [namePokemons]);
+  }, [namePokemons, end, begin]);
 
-  const handleMouseEnter = useCallback(({ target }) => {
-    let id = parseInt(target.id);
-    let img = imgRef.current.filter((e) => parseInt(e.id) === id);
-    if (!img[0]?.classList[0] === "img") return;
+  const handleMouseEnter = useCallback((event) => {
+    const { clientY, clientX } = event;
+    if (window.scrollY < 590) {
+      setOnMouse(false);
+      return;
+    }
+   const sprites = carrouselPhotoFilter(activePokemons, event.target.dataset.id)
+    sprites &&  setSprites(sprites)
+ 
+   setPosition({ x: clientX - 250, y: clientY + 500 });
+    setOnMouse(true);
+  },[position]);
+  const handleMouseLeave = useCallback((event) => {
+    if (window.scrollY < 590) {
+      setOnMouse(false);
+      return;
+    }
+    setOnMouse(false);
+  }, [position]);
 
-    if (!img[0]) return;
+  const handleMove = useCallback((event) => {
 
-    let pokemon = activePokemons.filter((e) => e.id === id);
+    //  setPosition({ x: event.clientX - 100, y: event.clientY + 400   });
+  }, []);
 
-    img[0].style.backgroundImage = `url(${pokemon[0].sprites.back_default})`;
-  },[activePokemons, imgRef]);
+  const handleClick = (prop) => {
+    dispatch(pagesController(prop));
+  };
 
-  const handleMouseLeave = useCallback(({ target }) => {
-    let id = parseInt(target.id);
-
-    let img = imgRef.current.filter((e) => parseInt(e.id) === id);
-
-    if (!img[0]) return;
-
-    let pokemon = activePokemons.filter((e) => e.id === id);
-
-    img[0].style.backgroundImage = `url(${pokemon[0].sprites.front_default})`;
-  },[activePokemons, imgRef]);
 
   return (
     <div>
-      <Grid>
+      {isLoading && <CursorWait />}
+      <Grid onMouseLeave={handleMouseLeave}>
+        {onMouse && (
+          <Carrousel
+            sprites={sprites}
+            ref={carrouselRef}
+            left={position.x}
+            top={position.y}
+          />
+        )}
         {activePokemons &&
           activePokemons.map((e, i) => (
             <Card
+              onMouseMove={handleMove}
               key={e.id}
               id={e.id}
               ref={(el) => (imgRef.current[i] = el)}
-              onMouseLeave={handleMouseLeave}
               onMouseEnter={handleMouseEnter}
               name={e.name}
               url={e.sprites.front_default}
@@ -68,8 +91,10 @@ export const PokemonGrid = () => {
             />
           ))}
       </Grid>
-      {/* <button onClick={ () => dispatch(pagesController('+')) }>+</button>
-        <button onClick={ ()=> dispatch(pagesController('-')) }>-</button> */}
+      <Btn>
+        <Button type={"-"} handleclick={() => handleClick("-")} />
+        <Button type={"+"} handleclick={() => handleClick("+")} />
+      </Btn>
     </div>
   );
 };
@@ -84,4 +109,11 @@ const Grid = styled.div`
   grid-template-rows: repeat(4, 1fr);
   justify-content: space-evenly;
   align-items: center;
+`;
+
+const Btn = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  height: 100px;
 `;

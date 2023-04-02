@@ -3,9 +3,6 @@ import styled from "styled-components"
 export const Banner = () => {
   return (
     <Container>
-    <div>
-        
-    </div>
     </Container>
   )
 }
@@ -16,8 +13,8 @@ const Container = styled.div`
     background-position: center center;
      background-repeat: no-repeat;
     background-size: 56%;
-     height: 40%;
+     height: 500px;
     width:100%;
-    background-color: #e4000f;
+    background-color: #2B3467;
     border-bottom: 2px solid #FFC300;
 `

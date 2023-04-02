@@ -17,14 +17,10 @@ export const Main = () => {
 
 const Container = styled.div`
   flex-direction: column;
-  height: 1500px;
+  height: 1600px;
   display: flex;
   justify-content: center;
   text-align: center;
   align-items: center;
 
 `;
-
-const TitleStyle = styled.h2`
-  
-`
