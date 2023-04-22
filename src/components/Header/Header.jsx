@@ -14,8 +14,7 @@ export const Header = () => {
                   <div className="pokeball"></div>
                 </li>
                 <li><Input/></li>
-                
-                <li>About</li>
+        
               </LiStyle>
             </ul>
           </nav>
@@ -26,7 +25,10 @@ export const Header = () => {
 };
 
 const HeaderStyle = styled.header`
-background-color: #BAD7E9;
+  position:sticky;
+  background-color: #BAD7E9;
+  z-index: 2;
+  top: 0px;
   display: flex;
   flex-direction: row;
   width: 100%;

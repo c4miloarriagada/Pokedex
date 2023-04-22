@@ -3,13 +3,14 @@ import { PokemonGrid } from '../PokemonGrid/PokemonGrid'
 import { Banner } from '../../components/Banner/Banner'
 
 import styled from 'styled-components'
+import { Footer } from '../../components/Footer/Footer'
  
 export const Main = () => {
   return (
     <>  
     <Container>
-        <Banner/>
         <PokemonGrid/>
+        <Footer/>
     </Container>
     </>
   )
@@ -17,9 +18,7 @@ export const Main = () => {
 
 const Container = styled.div`
   flex-direction: column;
-  height: 1600px;
   display: flex;
-  justify-content: center;
   text-align: center;
   align-items: center;
 

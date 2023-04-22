@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import { Autocomplete } from "../AutoComplete/Autocomplete";
 import { autoComplete } from "../../helpers/autoComplete";
-import { FaSearch } from 'react-icons/fa';
 import styled from "styled-components";
+import { getPokemon } from "../../store/slices/pokemon/thunks";
 
 export const Input = () => {
   const { formState, onInputChange, onResetForm, onAutoComplete } = useForm({});
@@ -18,8 +18,14 @@ export const Input = () => {
 
   const [focus, setFocus] = useState(false);
 
+  const dispatch = useDispatch()
+
   const handleClick = (pokemonName) => {
     onAutoComplete(formState, "inputSearch", pokemonName);
+  };
+
+  const handleSearch = () => {
+   dispatch(getPokemon(inputSearch))
   };
 
   const handleFocus = () => {
@@ -32,7 +38,6 @@ export const Input = () => {
   return (
     <InputStyle>
       <div className="input-container">
-  
         <input
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -40,22 +45,21 @@ export const Input = () => {
           name="inputSearch"
           value={inputSearch || ""}
           onChange={onInputChange}
-
         />
         {pokemon?.length > 1 && (
           <div className="autocomplete-container">
             {pokemon.map((e) => (
               <Autocomplete
-              onClick={() => handleClick(e)}
-              key={e}
-              pokemons={e}
+                onClick={() => handleClick(e)}
+                key={e}
+                pokemons={e}
               />
-              ))}
+            ))}
           </div>
         )}
       </div>
       <div className="search">
-        <span>Search</span>
+        <span onClick={() => handleSearch()}>Search</span>
       </div>
       <div className="reset">
         <span onClick={onResetForm}>Reset</span>
@@ -65,25 +69,24 @@ export const Input = () => {
 };
 
 const InputStyle = styled.div`
-  position:;
-  display:flex;
+  position: relative;
+  display: flex;
   font-size: 1.5vh;
-  
+
   input {
-    
     border: 2px solid black;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     height: 28px;
-    border-color: #FCFFE7;
+    border-color: #fcffe7;
     border-width: 5px;
-    padding:  0 10px;
+    padding: 0 10px;
     width: 300px;
     transform: skew(-15deg);
   }
 
   input:focus {
     outline: none;
-    border-color: #EB455F;
+    border-color: #eb455f;
   }
 
   label {
@@ -117,37 +120,32 @@ const InputStyle = styled.div`
     flex-direction: column;
   }
 
-
-  .reset{
-    display:flex;
+  .reset {
+    display: flex;
     margin-left: 7px;
     align-items: end;
     transform: skew(-15deg);
     color: #ffffff;
-    
-    
   }
-  .reset:hover{
-    color: #2B3467;
+  .reset:hover {
+    color: #2b3467;
     transform: skew(-25deg);
   }
 
-  .search{
-    display:flex;
-    margin-left : 15px;
+  .search {
+    display: flex;
+    margin-left: 15px;
     align-items: center;
     background-color: #ffffff;
-    justify-content:center;
+    justify-content: center;
     width: 50px;
-    color:#3AB0FF;
+    color: #3ab0ff;
     transform: skew(-15deg);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-   }
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
 
-   .search:hover{
-    background-color: #3AB0FF;
+  .search:hover {
+    background-color: #3ab0ff;
     color: #ffffff;
-   
-   }
-
+  }
 `;

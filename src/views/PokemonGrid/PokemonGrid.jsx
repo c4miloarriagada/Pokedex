@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getPokemons,
   getPokemonsInfo,
@@ -8,10 +8,9 @@ import {
 import { Card } from "../../components/Card/Card";
 import { Button } from "../../components/Button/Button";
 import { pagesController } from "../../store/slices/pokemon/pokemonSlice";
-import { CursorWait } from "../../components/CursorWait/CursorWait";
 import { Carrousel } from "../../components/Carrousel/Carrousel";
-import styled from "styled-components";
 import { carrouselPhotoFilter } from "../../helpers/carrouselPhotosFilter";
+import styled from "styled-components";
 
 export const PokemonGrid = () => {
   const { activePokemons, end, begin, isLoading, namePokemons } = useSelector(
@@ -24,6 +23,7 @@ export const PokemonGrid = () => {
   const [onMouse, setOnMouse] = useState(false);
   const [sprites, setSprites] = useState([])
   const dispatch = useDispatch();
+  const [info, setInfo] = useState([])
 
   useEffect(() => {
     dispatch(getPokemons());
@@ -36,21 +36,19 @@ export const PokemonGrid = () => {
 
   const handleMouseEnter = useCallback((event) => {
     const { clientY, clientX } = event;
-    if (window.scrollY < 590) {
+    if (window.scrollY < 0) {
       setOnMouse(false);
       return;
     }
-   const sprites = carrouselPhotoFilter(activePokemons, event.target.dataset.id)
-    sprites &&  setSprites(sprites)
- 
-   setPosition({ x: clientX - 250, y: clientY + 500 });
+   const data = carrouselPhotoFilter(activePokemons, event.target.dataset.id)
+    data &&  setSprites(data?.sprites[0])
+
+    data && setInfo(data?.abilities[0])
+    
+   setPosition({ x: clientX , y: clientY });
     setOnMouse(true);
   },[position]);
   const handleMouseLeave = useCallback((event) => {
-    if (window.scrollY < 590) {
-      setOnMouse(false);
-      return;
-    }
     setOnMouse(false);
   }, [position]);
 
@@ -61,15 +59,15 @@ export const PokemonGrid = () => {
 
   const handleClick = (prop) => {
     dispatch(pagesController(prop));
-  };
+  };  
 
 
   return (
     <div>
-      {isLoading && <CursorWait />}
       <Grid onMouseLeave={handleMouseLeave}>
-        {onMouse && (
+        {true && (
           <Carrousel
+            info={info}
             sprites={sprites}
             ref={carrouselRef}
             left={position.x}
@@ -88,6 +86,7 @@ export const PokemonGrid = () => {
               url={e.sprites.front_default}
               height={e.height}
               weight={e.weight}
+              isLoading={isLoading}
             />
           ))}
       </Grid>
@@ -99,14 +98,15 @@ export const PokemonGrid = () => {
   );
 };
 
+
 const Grid = styled.div`
-  margin-top: 10vh;
+  margin-top: 20px;
   gap: 10px;
-  height: 1000px;
-  width: 1100px;
+  height: 990px;
+  max-width: 990px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: minmax(200px, auto);
   justify-content: space-evenly;
   align-items: center;
 `;
@@ -114,6 +114,8 @@ const Grid = styled.div`
 const Btn = styled.div`
   display: flex;
   width: 100%;
+  margin-top: 45px;
   justify-content: space-around;
-  height: 100px;
+  height: 80px;
 `;
+

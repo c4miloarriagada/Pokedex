@@ -5,10 +5,7 @@ const POKE_API_URL = `https://pokeapi.co/api/v2/pokemon`;
 export const getPokemons = () => {
   return async (dispacth, getState) => {
     dispacth(loading());
-    let data = await fetch(`${POKE_API_URL}?limit=1500&offset=0`, {
-      method: "GET",
-      mode: "cors",
-    });
+    let data = await fetch(`${POKE_API_URL}?limit=1500&offset=0`);
     data = await data.json();
     dispacth(parseNameOfPokemons(data.results));
   };
@@ -32,3 +29,14 @@ export const getPokemonsInfo = (pokemons) => {
     dispacth(loadPokemons(firstTenPokemons));
   };
 };
+
+export const getPokemon = (pokemon) => {
+  return async (dispacth) => {
+    dispacth(loading())
+    let data = await fetch(`${POKE_API_URL}/${pokemon}`)
+    data = await data.json();
+    
+    dispacth(loadPokemons([data]))
+
+  }
+}
