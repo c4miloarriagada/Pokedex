@@ -5,6 +5,7 @@ export const pokemonSlice = createSlice({
   initialState: {
     isLoading: false,
     activePokemons: [],
+    activePokemon: [],
     namePokemons: [],
     begin: 0,
     end: 12,
@@ -15,6 +16,21 @@ export const pokemonSlice = createSlice({
     },
     loadPokemons: (state, action) => {
       state.activePokemons = action.payload.map(
+        ({ abilities, forms, id, moves, name, sprites, weight, height }) => ({
+          abilities,
+          forms,
+          id,
+          moves,
+          name,
+          sprites,
+          weight,
+          height,
+        })
+      );
+      state.isLoading = false;
+    },
+    loadPokemon: (state, action) => {
+      state.activePokemon = action.payload.map(
         ({ abilities, forms, id, moves, name, sprites, weight, height }) => ({
           abilities,
           forms,
@@ -44,5 +60,5 @@ export const pokemonSlice = createSlice({
   },
 });
 
-export const { loading, loadPokemons, parseNameOfPokemons, pagesController } =
+export const { loading, loadPokemons, parseNameOfPokemons, pagesController, loadPokemon } =
   pokemonSlice.actions;

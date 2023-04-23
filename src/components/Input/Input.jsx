@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import { Autocomplete } from "../AutoComplete/Autocomplete";
 import { autoComplete } from "../../helpers/autoComplete";
-import styled from "styled-components";
 import { getPokemon } from "../../store/slices/pokemon/thunks";
+import styled from "styled-components";
 
 export const Input = () => {
   const { formState, onInputChange, onResetForm, onAutoComplete } = useForm({});
@@ -71,7 +71,7 @@ export const Input = () => {
 const InputStyle = styled.div`
   position: relative;
   display: flex;
-  font-size: 1.5vh;
+  font-size: 15px;
 
   input {
     border: 2px solid black;

@@ -4,12 +4,21 @@ import { Banner } from '../../components/Banner/Banner'
 
 import styled from 'styled-components'
 import { Footer } from '../../components/Footer/Footer'
+import { useSelector } from 'react-redux'
  
 export const Main = () => {
+
+  const { activePokemon } = useSelector((state)=> state.pokemons)
+
+
   return (
     <>  
     <Container>
-        <PokemonGrid/>
+      {activePokemon.length > 0 
+       ? <div>hola</div>
+       :  <PokemonGrid/>
+      }
+      
         <Footer/>
     </Container>
     </>

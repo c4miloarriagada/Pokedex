@@ -1,4 +1,4 @@
-import { loading, loadPokemons, parseNameOfPokemons } from "./pokemonSlice";
+import { loading, loadPokemons, parseNameOfPokemons, loadPokemon } from "./pokemonSlice";
 
 const POKE_API_URL = `https://pokeapi.co/api/v2/pokemon`;
 
@@ -36,7 +36,7 @@ export const getPokemon = (pokemon) => {
     let data = await fetch(`${POKE_API_URL}/${pokemon}`)
     data = await data.json();
     
-    dispacth(loadPokemons([data]))
+    dispacth(loadPokemon([data]))
 
   }
 }

@@ -53,9 +53,9 @@ export const PokemonGrid = () => {
   }, [position]);
 
   const handleMove = useCallback((event) => {
-
-    //  setPosition({ x: event.clientX - 100, y: event.clientY + 400   });
-  }, []);
+    setOnMouse(true);
+    //setPosition({ x: event.clientX - 100, y: event.clientY + 400   });
+  }, [position]);
 
   const handleClick = (prop) => {
     dispatch(pagesController(prop));
@@ -64,7 +64,7 @@ export const PokemonGrid = () => {
 
   return (
     <div>
-      <Grid onMouseLeave={handleMouseLeave}>
+      <Grid >
         {onMouse && (
           <Carrousel
             info={info}
@@ -72,11 +72,14 @@ export const PokemonGrid = () => {
             ref={carrouselRef}
             left={position.x}
             top={position.y}
+            onMouseMove={handleMove}
+            onMouseLeave={handleMouseLeave}
           />
         )}
         {activePokemons &&
           activePokemons.map((e, i) => (
             <Card
+              onMouseLeave={handleMouseLeave}
               onMouseMove={handleMove}
               key={e.id}
               id={e.id}

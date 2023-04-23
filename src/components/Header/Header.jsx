@@ -32,14 +32,17 @@ const HeaderStyle = styled.header`
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 10vh;
+  height: 90px;
   justify-content: center;
   align-items: center;
   border-bottom: 2px solid #ffc300;
   .pokeball {
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg");
-    height: 5vh;
-    width: 5vh;
+    background-image: url("https://res.cloudinary.com/dwtkwakbc/image/upload/v1682265450/flat_1000x1000_075_f-removebg-preview_ajvpkk.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 60px;
   }
 `;
 
@@ -47,9 +50,8 @@ const LiStyle = styled.ul`
   font-weight: 700;
   display: flex;
   flex-direction: row;
-  gap: 18vh;
+  gap: 20px;
   list-style-type: none;
-  font-size: 3vh;
 
   li{
     cursor: pointer;
