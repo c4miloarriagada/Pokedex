@@ -54,7 +54,6 @@ export const PokemonGrid = () => {
 
   const handleMove = useCallback((event) => {
     setOnMouse(true);
-    //setPosition({ x: event.clientX - 100, y: event.clientY + 400   });
   }, [position]);
 
   const handleClick = (prop) => {

@@ -15,7 +15,7 @@ export const Main = () => {
     <>  
     <Container>
       {activePokemon.length > 0 
-       ? <div>hola</div>
+       ? <div>WIP</div>
        :  <PokemonGrid/>
       }
       
