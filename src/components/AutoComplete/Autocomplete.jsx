@@ -15,7 +15,7 @@ export const Autocomplete = ({ onClick, pokemons }) => {
 const AutocompleteStyle = styled.ul`
     list-style:none;
     background-color: #FCFFE7;
-    
+  
     li:hover{
       background-color: #BAD7E9;
       box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);

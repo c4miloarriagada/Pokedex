@@ -14,7 +14,7 @@ export const autoComplete = (pokemons , target) => {
       });
 
       pokemon = pokemon.slice(0, 4)
-      
+  
       return {
         pokemon
       }

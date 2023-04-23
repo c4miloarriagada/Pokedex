@@ -1,10 +1,7 @@
-import { Title } from '../../components/Title/Title'
-import { PokemonGrid } from '../PokemonGrid/PokemonGrid'
-import { Banner } from '../../components/Banner/Banner'
-
-import styled from 'styled-components'
-import { Footer } from '../../components/Footer/Footer'
 import { useSelector } from 'react-redux'
+import { PokemonGrid } from '../PokemonGrid/PokemonGrid'
+import { Footer } from '../../components/Footer/Footer'
+import styled from 'styled-components'
  
 export const Main = () => {
 

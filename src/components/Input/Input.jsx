@@ -22,6 +22,7 @@ export const Input = () => {
 
   const handleClick = (pokemonName) => {
     onAutoComplete(formState, "inputSearch", pokemonName);
+    setFocus(false)
   };
 
   const handleSearch = () => {
@@ -33,10 +34,10 @@ export const Input = () => {
   };
 
   const handleBlur = () => {
-    setFocus(false);
+    // setFocus(false);
   };
   return (
-    <InputStyle>
+    <InputStyle pokemonLenght = {pokemon?.length}>
       <div className="input-container">
         <input
           onFocus={handleFocus}
@@ -46,9 +47,9 @@ export const Input = () => {
           value={inputSearch || ""}
           onChange={onInputChange}
         />
-        {pokemon?.length > 1 && (
+        {focus && (
           <div className="autocomplete-container">
-            {pokemon.map((e) => (
+            {pokemon?.map((e) => (
               <Autocomplete
                 onClick={() => handleClick(e)}
                 key={e}
@@ -110,7 +111,7 @@ const InputStyle = styled.div`
 
   .autocomplete-container {
     transform: skew(-15deg);
-    right: 15px;
+    right: ${({ pokemonLenght }) => pokemonLenght <= 2 ? 7: 15}px;
     position: absolute;
     z-index: 1;
     background-color: #ffffff;
