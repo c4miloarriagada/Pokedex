@@ -8,6 +8,7 @@ import { getPokemon } from "../../store/slices/pokemon/thunks";
 import styled from "styled-components";
 
 export const Input = () => {
+  
   const { formState, onInputChange, onResetForm, onAutoComplete } = useForm({});
 
   const { inputSearch } = formState;

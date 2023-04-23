@@ -4,7 +4,6 @@ import {
   getPokemons,
   getPokemonsInfo,
 } from "../../store/slices/pokemon/thunks";
-
 import { Card } from "../../components/Card/Card";
 import { Button } from "../../components/Button/Button";
 import { pagesController } from "../../store/slices/pokemon/pokemonSlice";
@@ -39,6 +38,7 @@ export const PokemonGrid = () => {
     if (window.scrollY < 0) {
       setOnMouse(false);
       return;
+
     }
    const data = carrouselPhotoFilter(activePokemons, event.target.dataset.id)
     data &&  setSprites(data?.sprites[0])
