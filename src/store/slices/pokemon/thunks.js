@@ -3,7 +3,7 @@ import { loading, loadPokemons, parseNameOfPokemons } from "./pokemonSlice";
 const POKE_API_URL = `https://pokeapi.co/api/v2/pokemon`;
 
 export const getPokemons = () => {
-  return async (dispacth, getState) => {
+  return async (dispacth) => {
     dispacth(loading());
     let data = await fetch(`${POKE_API_URL}?limit=1500&offset=0`);
     data = await data.json();

@@ -65,7 +65,7 @@ export const PokemonGrid = () => {
   return (
     <div>
       <Grid onMouseLeave={handleMouseLeave}>
-        {true && (
+        {onMouse && (
           <Carrousel
             info={info}
             sprites={sprites}
