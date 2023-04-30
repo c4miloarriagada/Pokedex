@@ -43,7 +43,7 @@ const Container = styled.footer`
   color: #ffc300;
   font-weight: 900;
   height: 200px;
-  width: 99%;
+  width: 97.9%;
   position: relative;
   padding: 20px;
   margin-right: 20px;

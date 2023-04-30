@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { PokemonGrid } from '../PokemonGrid/PokemonGrid'
 import { Footer } from '../../components/Footer/Footer'
+import { PokemonInfo } from '../../components/PokemonInfo/PokemonInfo'
 import styled from 'styled-components'
  
 export const Main = () => {
@@ -11,12 +12,12 @@ export const Main = () => {
   return (
     <>  
     <Container>
-      {activePokemon.length > 0 
-       ? <div>WIP</div>
+      {activePokemon 
+       ? <PokemonInfo/>
        :  <PokemonGrid/>
       }
       
-        <Footer/>
+      
     </Container>
     </>
   )

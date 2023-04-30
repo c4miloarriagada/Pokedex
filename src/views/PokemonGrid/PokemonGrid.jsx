@@ -48,11 +48,12 @@ export const PokemonGrid = () => {
    setPosition({ x: clientX , y: clientY });
     setOnMouse(true);
   },[position]);
-  const handleMouseLeave = useCallback((event) => {
+
+  const handleMouseLeave = useCallback(() => {
     setOnMouse(false);
   }, [position]);
 
-  const handleMove = useCallback((event) => {
+  const handleMove = useCallback(() => {
     setOnMouse(true);
   }, [position]);
 

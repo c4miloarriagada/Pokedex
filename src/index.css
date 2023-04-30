@@ -12,8 +12,7 @@
 
 body{
   background-color: #FCFFE7;
-  height: 100%;
-  width: 100%;
+
 }
 
 body::-webkit-scrollbar {
