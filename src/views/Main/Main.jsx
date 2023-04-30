@@ -12,7 +12,7 @@ export const Main = () => {
   return (
     <>  
     <Container>
-      {activePokemon 
+      {activePokemon.length > 0 
        ? <PokemonInfo/>
        :  <PokemonGrid/>
       }
