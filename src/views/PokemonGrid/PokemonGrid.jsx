@@ -112,6 +112,12 @@ const Grid = styled.div`
   grid-auto-rows: minmax(200px, auto);
   justify-content: space-evenly;
   align-items: center;
+  animation: fadeIn 1s ease-in-out;
+  
+  @keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+  }
 `;
 
 const Btn = styled.div`
@@ -120,5 +126,7 @@ const Btn = styled.div`
   margin-top: 45px;
   justify-content: space-around;
   height: 80px;
+  
+ 
 `;
 
