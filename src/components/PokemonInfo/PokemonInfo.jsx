@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { TypeWriter } from "../TypeWriter/TypeWriter";
 import { FaRegPlusSquare, FaRegMinusSquare } from "react-icons/fa";
 import { GiPunchBlast } from "react-icons/gi";
 import styled from "styled-components";
 
 export const PokemonInfo = ({ pokemonName, moves }) => {
+  const [cssPropsScroll, setcssPropsScroll] = useState({
+    backgroundColor: "",
+    animation: "",
+    flag: false,
+    border: "",
+    thumb: "#888",
+    scrollbar: "#f2f2f2",
+  });
   const handleClick = () => {
     console.log("hola");
   };
 
+  const handleScroll = useCallback(() => {
+    if (!cssPropsScroll.flag) {
+      setcssPropsScroll({
+        backgroundColor: "#888",
+        animation: "fadeIn",
+        flag: true,
+        border: "0px",
+        thumb: "#f2f2f2",
+        scrollbar: "#888",
+      });
+    }
+  }, []);
   return (
-    <main>
-      <Title>
-        <TypeWriter text={pokemonName} />
-      </Title>
+    <section>
       <Container>
+        <Title>
+          <TypeWriter text={pokemonName} />
+        </Title>
         <LedPokedex />
         {ledCssProps?.map(({ animation, shadow, color, top, left }, index) => (
           <Leds
@@ -48,11 +68,18 @@ export const PokemonInfo = ({ pokemonName, moves }) => {
             <FaRegPlusSquare />
           </span>
         </ButtonsContainer>
-        <InfoContainer>
+        <InfoContainer
+          onScroll={handleScroll}
+          backgroundColor={cssPropsScroll.backgroundColor}
+          animation={cssPropsScroll.animation}
+          border={cssPropsScroll.border}
+          thumbBackground={cssPropsScroll.thumb}
+          scrollbarBackground={cssPropsScroll.scrollbar}
+        >
           <div className="sticky-bar">
-          <h2>
-            Moves <GiPunchBlast />
-          </h2>
+            <h2>
+              Moves <GiPunchBlast />
+            </h2>
           </div>
           <ul>
             {moves &&
@@ -62,7 +89,7 @@ export const PokemonInfo = ({ pokemonName, moves }) => {
           </ul>
         </InfoContainer>
       </Container>
-    </main>
+    </section>
   );
 };
 
@@ -72,21 +99,21 @@ const ledCssProps = [
     shadow: "#fe0000",
     color: "#d11d31",
     left: "179px",
-    top: "57px",
+    top: "132px",
   },
   {
     animation: "yellow",
     shadow: "#f3fb26",
     color: "#969030",
     left: "207px",
-    top: "57px",
+    top: "132px",
   },
   {
     animation: "green",
     shadow: "#d4f722",
     color: "#84c241",
     left: "234px",
-    top: "57px",
+    top: "132px",
   },
 ];
 
@@ -95,7 +122,7 @@ const ButtonsContainer = styled.div`
   display: flex;
   height: 20px;
   width: 100px;
-  top: 540px;
+  top: 614px;
   left: 282px;
   align-items: center;
   justify-content: space-evenly;
@@ -116,10 +143,12 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 500px;
+  flex-direction: column;
+  height: 100%;
   width: 800px;
   z-index: 1;
   animation: fadeIn 1s ease-in-out;
+
   img {
     height: 700px;
     width: 700px;
@@ -140,7 +169,7 @@ const LedPokedex = styled.div`
   height: 80px;
   width: 60px;
   left: 110px;
-  top: 56px;
+  top: 130px;
   border-radius: 70%;
   outline: none;
   animation: shine 2s infinite;
@@ -192,7 +221,7 @@ const CarrouselContainer = styled.div`
   width: 220px;
   position: absolute;
   left: 130px;
-  top: 210px;
+  top: 290px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -216,23 +245,22 @@ const InfoContainer = styled.aside`
   width: 210px;
   height: 95px;
   position: absolute;
-  top: 252px;
-  left: 472px;
+  top: 325px;
+  left: 471px;
   display: flex;
   overflow: auto;
   display: flex;
   flex-direction: column;
-
+  border-top-left-radius: 5px;
   svg {
     color: #f3fb26;
   }
   h2 {
-    background-image: linear-gradient(to right, #fe0000, #f3fb26);
+    background-image: linear-gradient(to right, #fe3300, #f3fb26);
     -webkit-background-clip: text;
     -moz-background-clip: text;
     background-clip: text;
     color: transparent;
- 
   }
   p {
     margin-top: 4px;
@@ -246,29 +274,39 @@ const InfoContainer = styled.aside`
     display: flex;
     flex-direction: column;
     align-items: start;
-    list-style:none;
+    list-style: none;
   }
 
   ul li {
-    margin-left: 4px;
+    font-weight: 700;
+    margin-left: 9px;
   }
 
   &::-webkit-scrollbar {
-    width: 10px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: #888;
+    width: 7px;
+    border-radius: 5px;
+    border-top-left-radius: ${(props) => props.border};
+    background-color: ${(props) => props.scrollbarBackground};
   }
 
+  &::-webkit-scrollbar-thumb {
+    background: ${(props) => props.thumbBackground};
+    border-radius: 5px;
+    height: 50px;
+  }
 
   .sticky-bar {
     position: sticky;
     top: 0;
-}
+    background-color: ${(props) => props.backgroundColor};
+    animation: ${(props) => props.animation} 1s ease-in-out;
+  }
 
+  h2 {
+    animation: none;
+  }
 
-
-  @keyframes fadeIn {
+  @keyframes ${(props) => props.animation} {
     from {
       opacity: 0;
     }
@@ -278,7 +316,7 @@ const InfoContainer = styled.aside`
   }
 `;
 
-const Title = styled.h1`
+const Title = styled.h2`
   background-image: linear-gradient(to right, #f3fb26, #d11d31);
   -webkit-background-clip: text;
   -moz-background-clip: text;
@@ -287,14 +325,4 @@ const Title = styled.h1`
   text-transform: capitalize;
   font-size: 3rem;
   margin-top: 1rem;
-  animation: fadeIn 1s ease-in-out;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
 `;

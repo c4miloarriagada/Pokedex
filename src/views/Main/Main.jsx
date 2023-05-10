@@ -11,7 +11,7 @@ export const Main = () => {
 
   return (
     <>  
-    <Container>
+
       {activePokemon.length > 0 
        ? <PokemonInfo
        pokemonName={activePokemon[0]?.name}
@@ -20,17 +20,8 @@ export const Main = () => {
        />
        :  <PokemonGrid/>
       }
-      
-      
-    </Container>
+    
     </>
   )
 }
 
-const Container = styled.div`
-  flex-direction: column;
-  display: flex;
-  text-align: center;
-  align-items: center;
-
-`;

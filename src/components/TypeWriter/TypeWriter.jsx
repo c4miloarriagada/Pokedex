@@ -10,7 +10,7 @@ export const TypeWriter = ({ text }) => {
         setCurrentText((prevText) => prevText + text[currentIndex]);
         setCurrentIndex((prevIndex) => prevIndex + 1);
       }
-    }, 100);
+    }, 150);
 
     return () => clearTimeout(timer);
   }, [currentIndex, text]);

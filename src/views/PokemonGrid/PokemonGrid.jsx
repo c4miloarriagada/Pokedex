@@ -63,7 +63,7 @@ export const PokemonGrid = () => {
 
 
   return (
-    <div>
+    <Container>
       <Grid >
         {onMouse && (
           <Carrousel
@@ -97,15 +97,21 @@ export const PokemonGrid = () => {
         <Button type={"-"} handleclick={() => handleClick("-")} />
         <Button type={"+"} handleclick={() => handleClick("+")} />
       </Btn>
-    </div>
+    </Container>
   );
 };
 
 
-const Grid = styled.div`
+const Container = styled.section`
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+`
+const Grid = styled.section`
   margin-top: 20px;
   gap: 10px;
-  height: 990px;
   max-width: 990px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

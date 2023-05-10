@@ -74,7 +74,7 @@ const InputStyle = styled.div`
   position: relative;
   display: flex;
   font-size: 15px;
-
+ 
   input {
     border: 2px solid black;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -150,4 +150,17 @@ const InputStyle = styled.div`
     background-color: #3ab0ff;
     color: #ffffff;
   }
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items:end;
+    gap: 5px;
+    input{
+      width:200px;
+      
+    }
+    .search{
+      
+    }
+}
 `;

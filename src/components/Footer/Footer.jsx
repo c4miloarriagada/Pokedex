@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const Footer = () => {
   return (
-    <>
+    
       <Container>
         <div className="footer">
           <img
@@ -32,7 +32,7 @@ export const Footer = () => {
           </div>
         </Text>
       </Container>
-    </>
+    
   );
 };
 
@@ -46,7 +46,6 @@ const Container = styled.footer`
   width: 100%;
   position: relative;
   padding: 20px;
-  margin-right: 20px;
   background-color: #2b3467;
 
   a {
