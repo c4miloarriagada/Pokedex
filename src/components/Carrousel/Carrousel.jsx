@@ -1,4 +1,4 @@
-import { forwardRef, useMemo, useState } from "react";
+import { forwardRef, useMemo, useState, memo } from "react";
 import { useTransition, animated } from "react-spring";
 import { GiDervishSwords } from "react-icons/gi";
 import { RxDotFilled } from "react-icons/rx";

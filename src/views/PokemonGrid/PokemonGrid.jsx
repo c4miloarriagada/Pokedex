@@ -31,7 +31,7 @@ export const PokemonGrid = () => {
   useEffect(() => {
     if (!namePokemons) return;
     dispatch(getPokemonsInfo(namePokemons));
-  }, [namePokemons, end, begin]);
+  }, [ namePokemons,end, begin]);
 
   const handleMouseEnter = useCallback((event) => {
     const { clientY, clientX } = event;
@@ -41,21 +41,26 @@ export const PokemonGrid = () => {
 
     }
    const data = carrouselPhotoFilter(activePokemons, event.target.dataset.id)
-    data &&  setSprites(data?.sprites[0])
 
-    data && setInfo(data?.abilities[0])
-    
+   data &&  setSprites(data?.sprites[0])
+   
+   data && setInfo(data?.abilities[0])
+  
    setPosition({ x: clientX , y: clientY });
+
     setOnMouse(true);
-  },[position]);
+
+  },[carrouselRef.current]);
+
+
 
   const handleMouseLeave = useCallback(() => {
     setOnMouse(false);
-  }, [position]);
+  },[carrouselRef.current]);
 
-  const handleMove = useCallback(() => {
+  const handleMove = useCallback(() => { 
     setOnMouse(true);
-  }, [position]);
+  },[carrouselRef.current])
 
   const handleClick = (prop) => {
     dispatch(pagesController(prop));

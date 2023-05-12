@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export const TypeWriter = ({ text }) => {
   const [currentIndex, setCurrentIndex] = useState(0);

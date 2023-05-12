@@ -24,8 +24,6 @@ export const getPokemonsInfo = (pokemons) => {
     const firstTenPokemons = await Promise.all(
       responses.map((response) => response.json())
     );
-    
- 
     dispacth(loadPokemons(firstTenPokemons));
   };
 };

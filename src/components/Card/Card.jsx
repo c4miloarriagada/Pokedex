@@ -1,8 +1,8 @@
-import { forwardRef } from "react";
+import { forwardRef, memo } from "react";
 import { GiDiplodocus, GiAnvil } from "react-icons/gi";
 import styled from "styled-components";
 
-export const Card = forwardRef(
+export const Card = memo(forwardRef(
   (
     {
       id,
@@ -19,7 +19,7 @@ export const Card = forwardRef(
     ref
   ) => {
     let nameCap = name.charAt(0).toUpperCase() + name.slice(1);
-
+  
     return (
       <Container
         ref={ref}
@@ -52,7 +52,7 @@ export const Card = forwardRef(
       </Container>
     );
   }
-);
+));
 
 const Container = styled.div`
   cursor: pointer;

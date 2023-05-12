@@ -1,14 +1,13 @@
 import { useSelector } from 'react-redux'
 import { PokemonGrid } from '../PokemonGrid/PokemonGrid'
 import { PokemonInfo } from '../../components/PokemonInfo/PokemonInfo'
-import styled from 'styled-components'
+
  
 export const Main = () => {
 
   const { activePokemon } = useSelector((state)=> state.pokemons)
 
-
-
+  
   return (
     <>  
 
@@ -20,6 +19,9 @@ export const Main = () => {
        />
        :  <PokemonGrid/>
       }
+
+    
+      
     
     </>
   )

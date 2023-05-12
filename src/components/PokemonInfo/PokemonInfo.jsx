@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from "react";
+import {  useState,  memo } from "react";
 import { TypeWriter } from "../TypeWriter/TypeWriter";
 import { FaRegPlusSquare, FaRegMinusSquare } from "react-icons/fa";
 import { GiPunchBlast } from "react-icons/gi";
 import styled from "styled-components";
 
-export const PokemonInfo = ({ pokemonName, moves }) => {
+export const PokemonInfo = memo(({ pokemonName, moves }) => {
   const [cssPropsScroll, setcssPropsScroll] = useState({
     backgroundColor: "",
     animation: "",
@@ -17,7 +17,8 @@ export const PokemonInfo = ({ pokemonName, moves }) => {
     console.log("hola");
   };
 
-  const handleScroll = useCallback(() => {
+
+  const handleScroll = () => {
     if (!cssPropsScroll.flag) {
       setcssPropsScroll({
         backgroundColor: "#888",
@@ -28,7 +29,8 @@ export const PokemonInfo = ({ pokemonName, moves }) => {
         scrollbar: "#888",
       });
     }
-  }, []);
+  };
+
   return (
     <section>
       <Container>
@@ -91,7 +93,7 @@ export const PokemonInfo = ({ pokemonName, moves }) => {
       </Container>
     </section>
   );
-};
+});
 
 const ledCssProps = [
   {
