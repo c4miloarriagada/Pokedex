@@ -4,7 +4,7 @@ import { FaRegPlusSquare, FaRegMinusSquare } from "react-icons/fa";
 import { GiPunchBlast } from "react-icons/gi";
 import styled from "styled-components";
 
-export const PokemonInfo = memo(({ pokemonName, moves }) => {
+export const PokemonInfo = memo(({ pokemonName, moves, handleClick, sprites }) => {
   const [cssPropsScroll, setcssPropsScroll] = useState({
     backgroundColor: "",
     animation: "",
@@ -13,10 +13,6 @@ export const PokemonInfo = memo(({ pokemonName, moves }) => {
     thumb: "#888",
     scrollbar: "#f2f2f2",
   });
-  const handleClick = () => {
-    console.log("hola");
-  };
-
 
   const handleScroll = () => {
     if (!cssPropsScroll.flag) {
@@ -31,11 +27,13 @@ export const PokemonInfo = memo(({ pokemonName, moves }) => {
     }
   };
 
+  console.log(pokemonName)
   return (
     <section>
       <Container>
         <Title>
-          <TypeWriter text={pokemonName} />
+          {/* <TypeWriter text={pokemonName} /> */}
+          {pokemonName}
         </Title>
         <LedPokedex />
         {ledCssProps?.map(({ animation, shadow, color, top, left }, index) => (
@@ -57,16 +55,16 @@ export const PokemonInfo = memo(({ pokemonName, moves }) => {
         <CarrouselContainer>
           <div className="carrousel-div">
             <img
-              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png"
+              src={ sprites }
               alt=""
             />
           </div>
         </CarrouselContainer>
         <ButtonsContainer>
-          <span onClick={() => handleClick()}>
+          <span onClick={() => handleClick('-')}>
             <FaRegMinusSquare />
           </span>
-          <span>
+          <span onClick={() => handleClick('+')}>
             <FaRegPlusSquare />
           </span>
         </ButtonsContainer>
@@ -101,21 +99,21 @@ const ledCssProps = [
     shadow: "#fe0000",
     color: "#d11d31",
     left: "179px",
-    top: "132px",
+    top: "129px",
   },
   {
     animation: "yellow",
     shadow: "#f3fb26",
     color: "#969030",
     left: "207px",
-    top: "132px",
+    top: "129px",
   },
   {
     animation: "green",
     shadow: "#d4f722",
     color: "#84c241",
     left: "234px",
-    top: "132px",
+    top: "129px",
   },
 ];
 
@@ -124,7 +122,7 @@ const ButtonsContainer = styled.div`
   display: flex;
   height: 20px;
   width: 100px;
-  top: 614px;
+  top: 610px;
   left: 282px;
   align-items: center;
   justify-content: space-evenly;
@@ -170,8 +168,8 @@ const LedPokedex = styled.div`
   position: absolute;
   height: 80px;
   width: 60px;
-  left: 110px;
-  top: 130px;
+  left: 111px;
+  top: 129px;
   border-radius: 70%;
   outline: none;
   animation: shine 2s infinite;
@@ -255,10 +253,10 @@ const InfoContainer = styled.aside`
   flex-direction: column;
   border-top-left-radius: 5px;
   svg {
-    color: #f3fb26;
+    color: #ffffff;
   }
   h2 {
-    background-image: linear-gradient(to right, #fe3300, #f3fb26);
+    background-image: linear-gradient(to right, #b1adbb, #ffffff);
     -webkit-background-clip: text;
     -moz-background-clip: text;
     background-clip: text;
@@ -319,7 +317,7 @@ const InfoContainer = styled.aside`
 `;
 
 const Title = styled.h2`
-  background-image: linear-gradient(to right, #f3fb26, #d11d31);
+  background-image: linear-gradient(to right, #41375e, #d11d31);
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text;

@@ -30,7 +30,6 @@ export const pokemonSlice = createSlice({
       state.isLoading = false;
     },
     loadPokemon: (state, action) => {
-      console.log('loadPokemon')
       state.activePokemon = action.payload.map(
         ({ abilities, forms, id, moves, name, sprites, weight, height }) => ({
           abilities,

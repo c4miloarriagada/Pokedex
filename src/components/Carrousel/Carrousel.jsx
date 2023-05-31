@@ -20,9 +20,9 @@ export const Carrousel = forwardRef(
     });
 
     const transitionAvatar = useTransition(sprites[1],{
-      from: { opacity: 0 },
-      enter: { opacity: 1 },
-      leave: { opacity: 0 },
+      // from: { opacity: 0 },
+      // enter: { opacity: 1 },
+      // leave: { opacity: 0 },
       
       
     })
@@ -103,6 +103,7 @@ const Container = styled.div`
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   border: 2px solid #aaa;
   border-radius: 8px;
+  
 
   .title-container {
     display: flex;
@@ -160,10 +161,8 @@ const Container = styled.div`
 
   .avatar{
     width: 400px;
-    
   }
-  
- 
+
   .photo {
     clip-path: inset(0);
     display: flex;

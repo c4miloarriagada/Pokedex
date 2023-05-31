@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState,memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getPokemons,
@@ -11,7 +11,7 @@ import { Carrousel } from "../../components/Carrousel/Carrousel";
 import { carrouselPhotoFilter } from "../../helpers/carrouselPhotosFilter";
 import styled from "styled-components";
 
-export const PokemonGrid = () => {
+export const PokemonGrid = memo(() => {
   const { activePokemons, end, begin, isLoading, namePokemons } = useSelector(
     (state) => state.pokemons
   );
@@ -31,7 +31,7 @@ export const PokemonGrid = () => {
   useEffect(() => {
     if (!namePokemons) return;
     dispatch(getPokemonsInfo(namePokemons));
-  }, [ namePokemons,end, begin]);
+  }, [end, begin]);
 
   const handleMouseEnter = useCallback((event) => {
     const { clientY, clientX } = event;
@@ -69,18 +69,20 @@ export const PokemonGrid = () => {
 
   return (
     <Container>
-      <Grid >
         {onMouse && (
-          <Carrousel
-            info={info}
-            sprites={sprites}
-            ref={carrouselRef}
-            left={position.x}
-            top={position.y}
-            onMouseMove={handleMove}
-            onMouseLeave={handleMouseLeave}
-          />
+          <Animation>
+            <Carrousel
+              info={info}
+              sprites={sprites}
+              ref={carrouselRef}
+              left={position.x}
+              top={position.y}
+              onMouseMove={handleMove}
+              onMouseLeave={handleMouseLeave}
+            />
+          </Animation>
         )}
+      <Grid >
         {activePokemons &&
           activePokemons.map((e, i) => (
             <Card
@@ -104,8 +106,16 @@ export const PokemonGrid = () => {
       </Btn>
     </Container>
   );
-};
+});
 
+const Animation = styled.div`
+  animation: fadeIn 1s ease-in-out;
+  
+  @keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+  }
+`
 
 const Container = styled.section`
   @media only screen and (max-width: 768px) {
