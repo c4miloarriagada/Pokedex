@@ -30,7 +30,6 @@ export const Main = () => {
   }
 
 
-
   return (
     <>  
 
@@ -44,10 +43,6 @@ export const Main = () => {
        :  <PokemonGrid/>
       }
  
-
-    
-      
-    
     </>
   )
 }
